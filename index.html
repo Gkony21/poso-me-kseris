@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Πόσο καλά με ξέρεις;</title>
+<meta name="description" content="10 ερωτήσεις. Για να δούμε.">
+<meta property="og:title" content="Πόσο καλά με ξέρεις;">
+<meta property="og:description" content="10 ερωτήσεις. Για να δούμε.">
+<meta property="og:image" content="https://gkony21.github.io/poso-me-kseris/og.png">
+<meta property="og:url" content="https://gkony21.github.io/poso-me-kseris/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0b0b0c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0b0b0c; --card: #151517; --line: #2a2a2e; --ink: #f4f1ea; --muted: #9a978f; --gold: #f5c400; --good: #3ecf7a; --bad: #ff5d5d; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: Manrope, system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
+  main { max-width: 480px; margin: 0 auto; padding: calc(env(safe-area-inset-top) + 28px) 20px calc(env(safe-area-inset-bottom) + 28px); min-height: 100svh; display: flex; flex-direction: column; }
+  .screen { display: none; flex: 1; flex-direction: column; }
+  .screen.on { display: flex; animation: in .35s ease; }
+  @keyframes in { from { opacity: 0; transform: translateY(10px); } }
+  .tag { color: var(--gold); font-weight: 800; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; }
+  h1 { font-size: 40px; line-height: 1.05; margin: 14px 0 12px; font-weight: 800; letter-spacing: -.02em; }
+  h2 { font-size: 26px; line-height: 1.2; margin: 18px 0 22px; font-weight: 800; letter-spacing: -.01em; }
+  p.lead { color: var(--muted); font-size: 16px; line-height: 1.6; margin: 0 0 28px; }
+  label { font-size: 13px; color: var(--muted); font-weight: 600; }
+  input[type=text] { width: 100%; margin-top: 8px; font: inherit; font-size: 18px; color: var(--ink); background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 16px; outline: none; }
+  input[type=text]:focus { border-color: var(--gold); }
+  .err { color: var(--bad); font-size: 13px; min-height: 20px; margin-top: 8px; }
+  .btn { width: 100%; font: inherit; font-weight: 800; font-size: 17px; color: #111; background: var(--gold); border: 0; border-radius: 14px; padding: 17px; cursor: pointer; margin-top: auto; transition: transform .1s; }
+  .btn:active { transform: scale(.98); }
+  .btn.ghost { background: none; color: var(--ink); border: 1px solid var(--line); margin-top: 12px; }
+  .progress { display: flex; gap: 5px; }
+  .progress i { flex: 1; height: 4px; border-radius: 4px; background: var(--line); transition: background .3s; }
+  .progress i.done { background: var(--gold); }
+  .count { margin-top: 18px; color: var(--muted); font-size: 13px; font-weight: 600; }
+  .opts { display: flex; flex-direction: column; gap: 10px; }
+  .opt { text-align: left; font: inherit; font-size: 16px; font-weight: 600; line-height: 1.4; color: var(--ink); background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 15px 16px; cursor: pointer; transition: border-color .2s, background .2s, opacity .2s; }
+  .opt:disabled { cursor: default; }
+  .opt.right { border-color: var(--good); background: rgba(62, 207, 122, .12); }
+  .opt.wrong { border-color: var(--bad); background: rgba(255, 93, 93, .12); }
+  .opt.dim { opacity: .45; }
+  .note { margin: 18px 0 20px; padding: 14px 16px; border-radius: 14px; background: var(--card); border-left: 3px solid var(--gold); font-size: 15px; line-height: 1.5; display: none; }
+  .note.on { display: block; animation: in .3s ease; }
+  .note b { display: block; font-size: 13px; letter-spacing: .06em; margin-bottom: 4px; }
+  .pay { margin: 22px 0; padding: 20px; border-radius: 16px; background: var(--card); border: 1px solid var(--line); }
+  .pay .row { display: flex; justify-content: space-between; align-items: baseline; font-size: 15px; color: var(--muted); }
+  .pay .price { font-size: 34px; font-weight: 800; color: var(--ink); }
+  .joke { margin: auto 0; text-align: center; font-size: 34px; font-weight: 800; line-height: 1.2; }
+  .joke small { display: block; margin-top: 12px; font-size: 16px; font-weight: 600; color: var(--muted); }
+  .score { font-size: 96px; font-weight: 800; line-height: 1; margin: 26px 0 6px; letter-spacing: -.04em; }
+  .score span { color: var(--muted); font-size: 40px; }
+  .verdict { font-size: 22px; font-weight: 800; margin: 6px 0 10px; }
+</style>
+</head>
+<body>
+<main>
+  <section class="screen on" id="s-intro">
+    <span class="tag">10 ερωτήσεις</span>
+    <h1>Πόσο καλά<br>με ξέρεις;</h1>
+    <p class="lead">Λες ότι με ξέρεις. Για να δούμε.<br>Στο τέλος μου στέλνεις το σκορ σου.</p>
+    <label for="name">Πώς σε λένε;</label>
+    <input type="text" id="name" maxlength="30" placeholder="Μαρία" autocomplete="given-name">
+    <div class="err" id="err"></div>
+    <button class="btn" id="start">Ξεκίνα</button>
+  </section>
+
+  <section class="screen" id="s-pay">
+    <span class="tag">Ένα τελευταίο βήμα</span>
+    <h2>Για να συνεχίσεις στο τεστ απαιτείται πληρωμή.</h2>
+    <div class="pay">
+      <div class="row"><span>Πρόσβαση στο τεστ</span><span class="price">4,99€</span></div>
+      <div class="row" style="margin-top:8px"><span>Εφάπαξ χρέωση</span><span>💳</span></div>
+    </div>
+    <button class="btn" id="pay">Πληρωμή με κάρτα</button>
+    <button class="btn ghost" id="nopay">Δεν πληρώνω</button>
+  </section>
+
+  <section class="screen" id="s-joke">
+    <div class="joke">Πλάκα κάνω 😂<small>Πάμε στο τεστ…</small></div>
+  </section>
+
+  <section class="screen" id="s-q">
+    <div class="progress" id="progress"></div>
+    <div class="count" id="count"></div>
+    <h2 id="question"></h2>
+    <div class="opts" id="opts"></div>
+    <div class="note" id="note"></div>
+    <button class="btn" id="next" style="display:none">Επόμενη</button>
+  </section>
+
+  <section class="screen" id="s-end">
+    <span class="tag" id="endName"></span>
+    <div class="score" id="score"></div>
+    <div class="verdict" id="verdict"></div>
+    <p class="lead" id="verdictSub"></p>
+    <button class="btn" id="send">Στείλε μου το σκορ στο WhatsApp</button>
+    <button class="btn ghost" id="again">Ξαναπαίξε</button>
+  </section>
+</main>
+
+<script>
+// right = correct answer, wrong = the three decoys, onRight / onWrong = comment shown after answering
+const QUESTIONS = [
+  { q: 'Καφές: τι πίνω;', right: 'Φρέντο εσπρέσο σκέτο', wrong: ['Φρέντο εσπρέσο μέτριο', 'Φραπέ μέτριο με γάλα', 'Δεν πίνω καφέ'],
+    onRight: 'Σκέτος. Όπως πρέπει.', onWrong: 'Φύγε, μη σε ξαναδώ 😤' },
+  { q: 'Ποια είναι η αγαπημένη μου σειρά ή ταινία;', right: 'Lord of the Rings (η τριλογία)', wrong: ['Breaking Bad', 'Game of Thrones', 'Peaky Blinders'],
+    onRight: 'Το ανώτερο απ’ όλα. 🧙‍♂️', onWrong: 'Πόσο μικρός είσαι; 😂 Το Lord of the Rings είναι ανώτερο απ’ όλα.' },
+  { q: 'Αν κέρδιζα το Τζόκερ, τι θα έκανα πρώτο;', right: 'Ιδιωτικό shooting range με όπλα και οχήματα τύπου Battlefield', wrong: ['2 jets και 3 αμάξια', 'Ντουμπάι, σε ένα κότερο γεμάτο γυναίκες', 'Σπίτι στη Μύκονο'],
+    onRight: 'Και θα σε καλούσα για ένα γύρο. 🎯', onWrong: 'Πάντως εσένα σίγουρα δεν θα σου μιλούσα πια 😂' },
+  { q: 'Ποιο είναι το κρυφό μου ταλέντο;', right: 'Κανένα. Είμαι τέλειος σε όλα', wrong: ['Πολεμικές τέχνες (striking)', 'Ξέρω πολύ καλή μουσική', 'Λύνω προβλήματα γρήγορα'],
+    onRight: 'Δεν είναι κρυφό αν το ξέρουν όλοι 😎', onWrong: 'Πόσο δεν με ξέρεις 😂' },
+  { q: 'Τι δεν θα έκανα ποτέ, ούτε για λεφτά;', right: 'Πιλάτες', wrong: ['Να φάω σαλιγκάρια', 'Να βγω έξω γυμνός', 'Να ξυρίσω το κεφάλι μου'],
+    onRight: 'Ούτε για όλα τα λεφτά του κόσμου. Εκτός αν μου το ζητούσε η Margot Robbie 😏', onWrong: 'Πιλάτες. Ούτε για όλα τα λεφτά του κόσμου. Εκτός αν μου το ζητούσε η Margot Robbie 😏' },
+  { q: 'Ποια είναι η ατάκα μου;', right: 'Ασούμε', wrong: ['Μπρο', 'Ψιλοκατάλαβες', 'Μπέσα'],
+    onRight: 'Ξέρεις. 🤝', onWrong: 'Αν δεν με έχεις ακούσει να το λέω, ίσως δεν με ξέρεις όσο νομίζεις.' },
+  { q: 'Σε τι είμαι πολύ ανταγωνιστικός;', right: 'Σε όλα, σε ό,τι υπάρχει', wrong: ['Στη δουλειά', 'Στα αθλήματα', 'Στο LoL (League of Legends)'],
+    onRight: 'Σε ΟΛΑ. 🏆', onWrong: 'Μόνο εκεί; Είμαι ανταγωνιστικός ακόμα και στο πρωινό.' },
+  { q: 'Ποιο είναι το ιδανικό μου ραντεβού;', right: 'Γήπεδο για ΑΕΚ και μετά sparring 🥊', wrong: ['Σινεμά, ποπκόρν και μετά σπίτι', 'Βόλτα με το αμάξι για θέα', 'Βόλτα στη θάλασσα με ποτό'],
+    onRight: 'Ρομάντζο στα καλύτερά του. 💛🖤', onWrong: 'Πολύ ρομαντικό… για κάποιον άλλον 😂' },
+  { q: 'Τι δώρο θα με έκανε πραγματικά χαρούμενο;', right: 'Audi R8', wrong: ['Νέος υπολογιστής με την καλύτερη κάρτα γραφικών', 'PlayStation 5', 'Γάντια πυγμαχίας'],
+    onRight: 'Περιμένω. 🔑', onWrong: 'Πόσο τσιγκούνης είσαι; 😂' },
+  { q: 'Ποιον celebrity θα καλούσα για φαγητό;', right: 'Πέτρος Μάνταλος', wrong: ['Margot Robbie', 'Megan Fox', 'Sydney Sweeney'],
+    onRight: 'Ο αρχηγός 💛🖤 Ναι, ακόμα και πάνω από τη Margot Robbie.', onWrong: 'Ο αρχηγός 💛🖤 Ναι, ακόμα και πάνω από τη Margot Robbie.' },
+];
+
+const VERDICTS = [
+  [3, 'Δεν με ξέρεις καθόλου 😂', 'Πρέπει να βγούμε για καφέ. Φρέντο εσπρέσο σκέτο, να ξέρεις.'],
+  [6, 'Κάτι ξέρεις…', 'Αλλά όχι αρκετά. Υπάρχει δουλειά.'],
+  [8, 'Με ξέρεις καλά 😎', 'Σεβαστό. Λίγο ακόμα και είσαι στον κύκλο.'],
+  [10, 'Κολλητός level 🤝', 'Με ξέρεις όσο με ξέρω κι εγώ. Λίγο τρομακτικό.'],
+];
+
+const $ = id => document.getElementById(id);
+let name = '', idx = 0, score = 0;
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
+  scrollTo(0, 0);
+}
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+$('progress').innerHTML = QUESTIONS.map(() => '<i></i>').join('');
+$('name').addEventListener('input', () => { $('err').textContent = ''; });
+$('name').addEventListener('keydown', e => { if (e.key === 'Enter') $('start').click(); });
+
+$('start').addEventListener('click', () => {
+  name = $('name').value.trim();
+  if (!name) { $('err').textContent = 'Γράψε πρώτα το όνομά σου.'; $('name').focus(); return; }
+  idx = 0; score = 0;
+  show('s-pay');
+});
+function joke() {
+  show('s-joke');
+  setTimeout(() => { renderQuestion(); show('s-q'); }, 2000);
+}
+$('pay').addEventListener('click', joke);
+$('nopay').addEventListener('click', joke);
+
+function renderQuestion() {
+  const Q = QUESTIONS[idx];
+  [...$('progress').children].forEach((el, i) => el.classList.toggle('done', i < idx));
+  $('count').textContent = `Ερώτηση ${idx + 1} από ${QUESTIONS.length}`;
+  $('question').textContent = Q.q;
+  $('note').className = 'note'; $('next').style.display = 'none';
+  $('opts').innerHTML = '';
+  for (const text of shuffle([Q.right, ...Q.wrong])) {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.textContent = text;
+    b.addEventListener('click', () => answer(b, text === Q.right));
+    $('opts').appendChild(b);
+  }
+}
+
+function answer(btn, correct) {
+  const Q = QUESTIONS[idx];
+  if (correct) score++;
+  [...$('opts').children].forEach(b => {
+    b.disabled = true;
+    if (b.textContent === Q.right) b.classList.add('right');
+    else if (b === btn) b.classList.add('wrong');
+    else b.classList.add('dim');
+  });
+  $('note').innerHTML = `<b style="color:var(${correct ? '--good' : '--bad'})">${correct ? 'ΣΩΣΤΟ' : 'ΛΑΘΟΣ'}</b>`;
+  $('note').append(correct ? Q.onRight : Q.onWrong);
+  $('note').classList.add('on');
+  $('next').textContent = idx === QUESTIONS.length - 1 ? 'Δες το σκορ σου' : 'Επόμενη';
+  $('next').style.display = 'block';
+  if (navigator.vibrate) navigator.vibrate(correct ? 20 : [30, 40, 30]);
+}
+
+$('next').addEventListener('click', () => {
+  idx++;
+  if (idx < QUESTIONS.length) { renderQuestion(); return; }
+  const [, title, sub] = VERDICTS.find(([max]) => score <= max);
+  $('endName').textContent = name;
+  $('score').innerHTML = `${score}<span>/${QUESTIONS.length}</span>`;
+  $('verdict').textContent = title;
+  $('verdictSub').textContent = sub;
+  show('s-end');
+});
+
+$('send').addEventListener('click', () => {
+  const [, title] = VERDICTS.find(([max]) => score <= max);
+  const text = `${name}: ${score}/${QUESTIONS.length} στο «Πόσο καλά με ξέρεις;» (${title})\n${location.origin}${location.pathname}`;
+  location.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+});
+$('again').addEventListener('click', () => show('s-intro'));
+</script>
+</body>
+</html>
